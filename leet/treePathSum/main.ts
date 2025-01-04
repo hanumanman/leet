@@ -9,18 +9,6 @@ class TreeNode {
   }
 }
 
-export function hasPathSum(root: TreeNode | null, targetSum: number): boolean {
-  if (!root) return false;
-
-  // If we reach a leaf node, check if remaining sum equals node value
-  if (!root.left && !root.right && root.val === targetSum) return true;
-
-  return (
-    hasPathSum(root.left, targetSum - root.val) ||
-    hasPathSum(root.right, targetSum - root.val)
-  );
-}
-
 export function arrayToTreeNode(arr: (number | null)[]): TreeNode | null {
   if (!arr.length) return null;
   const root = new TreeNode(arr[0]!);
@@ -42,4 +30,17 @@ export function arrayToTreeNode(arr: (number | null)[]): TreeNode | null {
     }
   }
   return root;
+}
+
+export function hasPathSum(node: TreeNode | null, targetSum: number): boolean {
+  if (!node) return false;
+
+  // If we reach a leaf node, check if remaining sum equals node value
+  if (!node.left && !node.right) return node.val === targetSum;
+
+  // Else check recursively
+  return (
+    hasPathSum(node.left, targetSum - node.val) ||
+    hasPathSum(node.right, targetSum - node.val)
+  );
 }
