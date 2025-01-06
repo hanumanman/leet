@@ -6,6 +6,5 @@ const targetSum = 22;
 
 Deno.test(function treeTest() {
   const treeNode = arrayToTreeNode(root);
-  console.log("treeTest ~ treeNode:", treeNode);
   assertEquals(hasPathSum(treeNode, targetSum), true);
 });
